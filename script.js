@@ -1041,3 +1041,254 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 });
+/* =========================================
+   TRANSACTIONS PAGE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const transactionList =
+        document.getElementById("transactionList");
+
+    if (!transactionList) {
+        return;
+    }
+
+
+    const filterButtons =
+        document.querySelectorAll(".transaction-filter");
+
+    const searchInput =
+        document.getElementById("transactionSearch");
+
+    const emptyState =
+        document.getElementById("transactionsEmpty");
+
+    const rows =
+        document.querySelectorAll(".transaction-row");
+
+
+    let currentFilter = "all";
+
+
+    /* =========================================
+       FILTER + SEARCH
+    ========================================= */
+
+    function filterTransactions() {
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+        let visibleCount = 0;
+
+
+        rows.forEach(function (row) {
+
+            const type =
+                row.dataset.type;
+
+            const searchText =
+                row.dataset.search.toLowerCase();
+
+
+            const matchesFilter =
+                currentFilter === "all" ||
+                type === currentFilter;
+
+
+            const matchesSearch =
+                search === "" ||
+                searchText.includes(search);
+
+
+            if (
+                matchesFilter &&
+                matchesSearch
+            ) {
+
+                row.style.display = "";
+
+                visibleCount++;
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+
+        if (visibleCount === 0) {
+
+            emptyState.style.display = "block";
+
+        } else {
+
+            emptyState.style.display = "none";
+
+        }
+
+    }
+
+
+    /* =========================================
+       FILTER BUTTONS
+    ========================================= */
+
+    filterButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                filterButtons.forEach(function (item) {
+
+                    item.classList.remove("active");
+
+                });
+
+
+                this.classList.add("active");
+
+
+                currentFilter =
+                    this.dataset.filter;
+
+
+                filterTransactions();
+
+            }
+        );
+
+    });
+
+
+    /* =========================================
+       SEARCH
+    ========================================= */
+
+    searchInput.addEventListener(
+        "input",
+        filterTransactions
+    );
+
+
+    /* =========================================
+       TRANSACTION DETAILS
+    ========================================= */
+
+    const transactionModal =
+        document.getElementById("transactionModal");
+
+    const detailTitle =
+        document.getElementById("detailTitle");
+
+    const detailAmount =
+        document.getElementById("detailAmount");
+
+    const detailDate =
+        document.getElementById("detailDate");
+
+    const detailReference =
+        document.getElementById("detailReference");
+
+
+    rows.forEach(function (row) {
+
+        row.style.cursor = "pointer";
+
+
+        row.addEventListener(
+            "click",
+            function () {
+
+                const title =
+                    this.querySelector(
+                        ".transaction-item strong"
+                    ).textContent.trim();
+
+
+                const date =
+                    this.children[1]
+                        .textContent.trim();
+
+
+                const reference =
+                    this.children[2]
+                        .textContent.trim();
+
+
+                const amount =
+                    this.children[4]
+                        .textContent.trim();
+
+
+                detailTitle.textContent =
+                    title;
+
+                detailAmount.textContent =
+                    amount;
+
+                detailDate.textContent =
+                    date;
+
+                detailReference.textContent =
+                    reference;
+
+
+                transactionModal.classList.add(
+                    "active"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+    });
+
+
+    /* =========================================
+       CLOSE TRANSACTION MODAL
+    ========================================= */
+
+    function closeTransactionModal() {
+
+        transactionModal.classList.remove(
+            "active"
+        );
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    document
+        .getElementById("closeTransactionModal")
+        .addEventListener(
+            "click",
+            closeTransactionModal
+        );
+
+
+    document
+        .getElementById("transactionModalClose")
+        .addEventListener(
+            "click",
+            closeTransactionModal
+        );
+
+
+    document
+        .getElementById("closeDetailBtn")
+        .addEventListener(
+            "click",
+            closeTransactionModal
+        );
+
+});
