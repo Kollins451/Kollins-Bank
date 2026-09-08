@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Cards | Kollins Bank</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           KOLLINS BANK — MY CARDS
+        ========================================= */
+
+        .cards-page {
+            min-height: 100vh;
+            background: #f5f8f6;
+        }
+
+        .cards-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .cards-sidebar {
+            width: 250px;
+            background: #087443;
+            color: #fff;
+            padding: 25px 18px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .cards-logo {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 35px;
+            padding: 0 10px;
+        }
+
+        .cards-logo span {
+            color: #a9f5c9;
+        }
+
+        .cards-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .cards-nav a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.82);
+            padding: 13px 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .cards-nav a:hover,
+        .cards-nav a.active {
+            background: rgba(255,255,255,0.14);
+            color: #fff;
+        }
+
+        .cards-nav .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            padding-top: 18px;
+        }
+
+        /* MAIN */
+        .cards-main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 30px;
+        }
+
+        .cards-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .cards-header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #13251c;
+        }
+
+        .cards-header p {
+            margin: 7px 0 0;
+            color: #718078;
+            font-size: 14px;
+        }
+
+        .mobile-cards-menu {
+            display: none;
+            border: none;
+            background: #087443;
+            color: white;
+            padding: 10px 13px;
+            border-radius: 9px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* TOP SECTION */
+        .cards-top-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        /* BANK CARD */
+        .bank-card-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid #e4ebe7;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+            color: #18251f;
+            font-size: 18px;
+        }
+
+        .bank-card {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            min-height: 285px;
+            border-radius: 22px;
+            padding: 30px;
+            margin: 0 auto;
+            overflow: hidden;
+            color: #fff;
+            background: linear-gradient(135deg, #075d37, #0b8c51 55%, #063f28);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+        }
+
+        .bank-card::before {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 50%;
+            right: -80px;
+            top: -80px;
+        }
+
+        .bank-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 50%;
+            left: -70px;
+            bottom: -90px;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-bank-name {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .card-type {
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        .chip {
+            width: 48px;
+            height: 37px;
+            border-radius: 7px;
+            margin-top: 38px;
+            background: linear-gradient(135deg, #d8d8d8, #9f9f9f, #e4e4e4);
+            position: relative;
+        }
+
+        .chip::after {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: 8px;
+            width: 22px;
+            height: 20px;
+            border: 1px solid #777;
+            border-radius: 4px;
+        }
+
+        .card-number {
+            font-size: 23px;
+            letter-spacing: 3px;
+            margin-top: 27px;
+            font-weight: 600;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 25px;
+        }
+
+        .card-small-label {
+            font-size: 9px;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .card-holder {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .card-expiry {
+            font-size: 13px;
+        }
+
+        /* CARD ACTIONS */
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+            justify-content: center;
+        }
+
+        .card-action-btn {
+            border: 1px solid #d9e3de;
+            background: #fff;
+            color: #17613e;
+            padding: 11px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .card-action-btn:hover {
+            background: #eff8f3;
+        }
+
+        .card-action-btn.danger {
+            color: #b3261e;
+            border-color: #f1d3d1;
+        }
+
+        .card-action-btn.danger:hover {
+            background: #fff4f3;
+        }
+
+        /* CARD INFORMATION */
+        .card-info {
+            background: #fff;
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid #e4ebe7;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .card-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf1ee;
+        }
+
+        .card-status:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #78847d;
+            font-size: 13px;
+        }
+
+        .info-value {
+            color: #1c2b23;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .status-active {
+            color: #087443;
+            background: #e9f8ef;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .status-frozen {
+            color: #9b5b00;
+            background: #fff5df;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* SECURITY */
+        .card-security {
+            background: #eff9f3;
+            border: 1px solid #d7eee0;
+            padding: 18px;
+            border-radius: 14px;
+            margin-top: 20px;
+        }
+
+        .card-security h3 {
+            margin: 0 0 7px;
+            font-size: 15px;
+            color: #12613b;
+        }
+
+        .card-security p {
+            margin: 0;
+            color: #587064;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* REQUEST CARD */
+        .request-card {
+            background: #fff;
+            border: 1px solid #e4ebe7;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .request-card-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .request-card h2 {
+            margin: 0 0 7px;
+            font-size: 18px;
+            color: #18251f;
+        }
+
+        .request-card p {
+            margin: 0;
+            color: #718078;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .request-btn {
+            white-space: nowrap;
+            border: none;
+            background: #087443;
+            color: #fff;
+            padding: 13px 18px;
+            border-radius: 9px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .request-btn:hover {
+            background: #075d37;
+        }
+
+        /* MODAL */
+        .card-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .card-modal.show {
+            display: flex;
+        }
+
+        .card-modal-box {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 17px;
+            padding: 25px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+
+        .card-modal-box h2 {
+            margin: 0 0 10px;
+            color: #17251e;
+        }
+
+        .card-modal-box p {
+            color: #6e7c74;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .modal-cancel,
+        .modal-confirm {
+            border: none;
+            padding: 11px 17px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .modal-cancel {
+            background: #eef1ef;
+            color: #36443c;
+        }
+
+        .modal-confirm {
+            background: #087443;
+            color: #fff;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .cards-sidebar {
+                transform: translateX(-100%);
+                transition: 0.25s ease;
+            }
+
+            .cards-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .cards-main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .mobile-cards-menu {
+                display: block;
+            }
+
+            .cards-top-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-header {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cards-main {
+                padding: 15px;
+            }
+
+            .cards-header h1 {
+                font-size: 23px;
+            }
+
+            .bank-card-section,
+            .card-info,
+            .request-card {
+                padding: 18px;
+            }
+
+            .bank-card {
+                min-height: 240px;
+                padding: 23px;
+                border-radius: 18px;
+            }
+
+            .card-number {
+                font-size: 17px;
+                letter-spacing: 2px;
+                margin-top: 22px;
+            }
+
+            .chip {
+                margin-top: 25px;
+                width: 42px;
+                height: 32px;
+            }
+
+            .request-card-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .request-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="cards-page">
+
+    <div class="cards-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="cards-sidebar" id="cardsSidebar">
+
+            <div class="cards-logo">
+                KOLLINS <span>BANK</span>
+            </div>
+
+            <nav class="cards-nav">
+
+                <a href="dashboard.html">
+                    🏠
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="transfer.html">
+                    💸
+                    <span>Send Money</span>
+                </a>
+
+                <a href="add-money.html">
+                    ➕
+                    <span>Add Money</span>
+                </a>
+
+                <a href="withdraw.html">
+                    ↗
+                    <span>Withdraw</span>
+                </a>
+
+                <a href="transactions.html">
+                    📋
+                    <span>Transactions</span>
+                </a>
+
+                <a href="cards.html" class="active">
+                    💳
+                    <span>My Cards</span>
+                </a>
+
+                <a href="profile.html">
+                    👤
+                    <span>Profile</span>
+                </a>
+
+                <a href="login.html" class="logout">
+                    🚪
+                    <span>Logout</span>
+                </a>
+
+            </nav>
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="cards-main">
+
+            <header class="cards-header">
+
+                <div>
+                    <h1>My Cards</h1>
+                    <p>Manage your Kollins Bank cards.</p>
+                </div>
+
+                <button class="mobile-cards-menu" id="cardsMenu">
+                    ☰
+                </button>
+
+            </header>
+
+
+            <!-- TOP GRID -->
+            <section class="cards-top-grid">
+
+                <!-- CARD -->
+                <div class="bank-card-section">
+
+                    <h2 class="section-title">Your Bank Card</h2>
+
+                    <div class="bank-card">
+
+                        <div class="card-content">
+
+                            <div class="card-top">
+
+                                <div class="card-bank-name">
+                                    KOLLINS BANK
+                                </div>
+
+                                <div class="card-type">
+                                    VISA
+                                </div>
+
+                            </div>
+
+                            <div class="chip"></div>
+
+                            <div class="card-number" id="cardNumber">
+                                •••• •••• •••• 4582
+                            </div>
+
+                            <div class="card-bottom">
+
+                                <div>
+                                    <div class="card-small-label">
+                                        CARD HOLDER
+                                    </div>
+
+                                    <div class="card-holder">
+                                        KOLLINS
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="card-small-label">
+                                        EXPIRES
+                                    </div>
+
+                                    <div class="card-expiry">
+                                        12/29
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-actions">
+
+                        <button class="card-action-btn" id="showCardBtn">
+                            Show Card Number
+                        </button>
+
+                        <button class="card-action-btn" id="copyCardBtn">
+                            Copy Card Number
+                        </button>
+
+                        <button class="card-action-btn danger" id="freezeCardBtn">
+                            Freeze Card
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD INFORMATION -->
+                <div class="card-info">
+
+                    <h2 class="section-title">
+                        Card Information
+                    </h2>
+
+                    <div class="card-status">
+
+                        <span class="info-label">
+                            Card Type
+                        </span>
+
+                        <span class="info-value">
+                            Debit Card
+                        </span>
+
+                    </div>
+
+                    <div class="card-status">
+
+                        <span class="info-label">
+                            Card Status
+                        </span>
+
+                        <span id="cardStatus" class="status-active">
+                            Active
+                        </span>
+
+                    </div>
+
+                    <div class="card-status">
+
+                        <span class="info-label">
+                            Last 4 Digits
+                        </span>
+
+                        <span class="info-value">
+                            4582
+                        </span>
+
+                    </div>
+
+                    <div class="card-status">
+
+                        <span class="info-label">
+                            Expiry Date
+                        </span>
+
+                        <span class="info-value">
+                            12/29
+                        </span>
+
+                    </div>
+
+                    <div class="card-status">
+
+                        <span class="info-label">
+                            Cardholder
+                        </span>
+
+                        <span class="info-value">
+                            Kollins
+                        </span>
+
+                    </div>
+
+                    <div class="card-security">
+
+                        <h3>🔒 Keep your card secure</h3>
+
+                        <p>
+                            Never share your card number, PIN, CVV or
+                            verification codes with anyone.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- REQUEST CARD -->
+            <section class="request-card">
+
+                <div class="request-card-content">
+
+                    <div>
+
+                        <h2>
+                            Need another card?
+                        </h2>
+
+                        <p>
+                            Request another physical or virtual card
+                            when this feature is available.
+                        </p>
+
+                    </div>
+
+                    <button class="request-btn" id="requestCardBtn">
+                        Request New Card
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- FREEZE MODAL -->
+    <div class="card-modal" id="freezeModal">
+
+        <div class="card-modal-box">
+
+            <h2 id="freezeTitle">
+                Freeze your card?
+            </h2>
+
+            <p id="freezeText">
+                Freezing your card will temporarily prevent card
+                transactions. You can unfreeze it later.
+            </p>
+
+            <div class="modal-actions">
+
+                <button class="modal-cancel" id="cancelFreeze">
+                    Cancel
+                </button>
+
+                <button class="modal-confirm" id="confirmFreeze">
+                    Freeze Card
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        /* =========================================
+           KOLLINS BANK — CARDS JAVASCRIPT
+        ========================================= */
+
+        const cardsMenu = document.getElementById("cardsMenu");
+        const cardsSidebar = document.getElementById("cardsSidebar");
+
+        const cardNumber = document.getElementById("cardNumber");
+        const showCardBtn = document.getElementById("showCardBtn");
+        const copyCardBtn = document.getElementById("copyCardBtn");
+
+        const freezeCardBtn = document.getElementById("freezeCardBtn");
+        const freezeModal = document.getElementById("freezeModal");
+        const cancelFreeze = document.getElementById("cancelFreeze");
+        const confirmFreeze = document.getElementById("confirmFreeze");
+
+        const cardStatus = document.getElementById("cardStatus");
+
+        const requestCardBtn = document.getElementById("requestCardBtn");
+
+        let cardVisible = false;
+        let cardFrozen = false;
+
+        /*
+           This is a frontend placeholder.
+           The real card number must NEVER be hardcoded
+           into the frontend. It will come from the secure
+           backend/card provider later.
+        */
+        const maskedCardNumber = "•••• •••• •••• 4582";
+
+        const frontendPlaceholderCardNumber =
+            "4111 1111 1111 4582";
+
+
+        /* MOBILE MENU */
+        if (cardsMenu) {
+
+            cardsMenu.addEventListener("click", () => {
+
+                cardsSidebar.classList.toggle("open");
+
+            });
+
+        }
+
+
+        /* SHOW / HIDE CARD NUMBER */
+        if (showCardBtn) {
+
+            showCardBtn.addEventListener("click", () => {
+
+                cardVisible = !cardVisible;
+
+                if (cardVisible) {
+
+                    /*
+                       Placeholder only.
+                       A real application should retrieve
+                       sensitive card data securely.
+                    */
+
+                    cardNumber.textContent =
+                        frontendPlaceholderCardNumber;
+
+                    showCardBtn.textContent =
+                        "Hide Card Number";
+
+                } else {
+
+                    cardNumber.textContent =
+                        maskedCardNumber;
+
+                    showCardBtn.textContent =
+                        "Show Card Number";
+
+                }
+
+            });
+
+        }
+
+
+        /* COPY CARD NUMBER */
+        if (copyCardBtn) {
+
+            copyCardBtn.addEventListener("click", async () => {
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        frontendPlaceholderCardNumber
+                    );
+
+                    copyCardBtn.textContent = "Copied!";
+
+                    setTimeout(() => {
+
+                        copyCardBtn.textContent =
+                            "Copy Card Number";
+
+                    }, 1500);
+
+                } catch (error) {
+
+                    alert(
+                        "Copy is not available on this browser."
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        /* OPEN FREEZE MODAL */
+        if (freezeCardBtn) {
+
+            freezeCardBtn.addEventListener("click", () => {
+
+                freezeModal.classList.add("show");
+
+                if (cardFrozen) {
+
+                    document.getElementById("freezeTitle")
+                        .textContent = "Unfreeze your card?";
+
+                    document.getElementById("freezeText")
+                        .textContent =
+                        "Your card will become active again and card transactions can resume.";
+
+                    confirmFreeze.textContent =
+                        "Unfreeze Card";
+
+                } else {
+
+                    document.getElementById("freezeTitle")
+                        .textContent = "Freeze your card?";
+
+                    document.getElementById("freezeText")
+                        .textContent =
+                        "Freezing your card will temporarily prevent card transactions.";
+
+                    confirmFreeze.textContent =
+                        "Freeze Card";
+
+                }
+
+            });
+
+        }
+
+
+        /* CANCEL MODAL */
+        if (cancelFreeze) {
+
+            cancelFreeze.addEventListener("click", () => {
+
+                freezeModal.classList.remove("show");
+
+            });
+
+        }
+
+
+        /* CONFIRM FREEZE / UNFREEZE */
+        if (confirmFreeze) {
+
+            confirmFreeze.addEventListener("click", () => {
+
+                cardFrozen = !cardFrozen;
+
+                if (cardFrozen) {
+
+                    cardStatus.textContent = "Frozen";
+
+                    cardStatus.className =
+                        "status-frozen";
+
+                    freezeCardBtn.textContent =
+                        "Unfreeze Card";
+
+                    freezeCardBtn.classList.remove("danger");
+
+                } else {
+
+                    cardStatus.textContent = "Active";
+
+                    cardStatus.className =
+                        "status-active";
+
+                    freezeCardBtn.textContent =
+                        "Freeze Card";
+
+                    freezeCardBtn.classList.add("danger");
+
+                }
+
+                freezeModal.classList.remove("show");
+
+            });
+
+        }
+
+
+        /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+        if (freezeModal) {
+
+            freezeModal.addEventListener("click", (event) => {
+
+                if (event.target === freezeModal) {
+
+                    freezeModal.classList.remove("show");
+
+                }
+
+            });
+
+        }
+
+
+        /* REQUEST NEW CARD */
+        if (requestCardBtn) {
+
+            requestCardBtn.addEventListener("click", () => {
+
+                alert(
+                    "Card requests will be connected to the banking backend later."
+                );
+
+            });
+
+        }
+    </script>
+
+</body>
+</html>
