@@ -678,3 +678,366 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 });
+/* =========================================
+   WITHDRAW MONEY PAGE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const withdrawForm =
+        document.getElementById("withdrawForm");
+
+    if (!withdrawForm) {
+        return;
+    }
+
+
+    const amountInput =
+        document.getElementById("withdrawAmount");
+
+    const withdrawMethod =
+        document.getElementById("withdrawMethod");
+
+    const withdrawAccount =
+        document.getElementById("withdrawAccount");
+
+    const withdrawBank =
+        document.getElementById("withdrawBank");
+
+    const withdrawAccountName =
+        document.getElementById("withdrawAccountName");
+
+    const accountMessage =
+        document.getElementById("withdrawAccountMessage");
+
+
+    const summaryAmount =
+        document.getElementById("withdrawSummaryAmount");
+
+    const withdrawFee =
+        document.getElementById("withdrawFee");
+
+    const summaryTotal =
+        document.getElementById("withdrawSummaryTotal");
+
+
+    const modal =
+        document.getElementById("withdrawModal");
+
+
+    const confirmAmount =
+        document.getElementById("confirmWithdrawAmount");
+
+    const confirmBank =
+        document.getElementById("confirmWithdrawBank");
+
+    const confirmAccount =
+        document.getElementById("confirmWithdrawAccount");
+
+    const confirmFee =
+        document.getElementById("confirmWithdrawFee");
+
+    const confirmTotal =
+        document.getElementById("confirmWithdrawTotal");
+
+
+    /*
+     * Withdrawal fee is deliberately kept as a
+     * configurable frontend value for now.
+     *
+     * In the real banking system, the server
+     * must calculate and enforce the fee.
+     */
+
+    const WITHDRAWAL_FEE = 0;
+
+
+    function formatMoney(amount) {
+
+        return "₦" + Number(amount).toLocaleString("en-NG", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    }
+
+
+    /* =========================================
+       QUICK AMOUNT BUTTONS
+    ========================================= */
+
+    const quickButtons =
+        document.querySelectorAll(
+            ".withdraw-quick button"
+        );
+
+
+    quickButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                amountInput.value =
+                    this.dataset.withdraw;
+
+                updateWithdrawSummary();
+
+            }
+        );
+
+    });
+
+
+    /* =========================================
+       UPDATE SUMMARY
+    ========================================= */
+
+    function updateWithdrawSummary() {
+
+        let amount =
+            Number(amountInput.value);
+
+
+        if (!amount || amount < 0) {
+            amount = 0;
+        }
+
+
+        const total =
+            amount + WITHDRAWAL_FEE;
+
+
+        summaryAmount.textContent =
+            formatMoney(amount);
+
+
+        withdrawFee.textContent =
+            formatMoney(WITHDRAWAL_FEE);
+
+
+        summaryTotal.textContent =
+            formatMoney(total);
+
+    }
+
+
+    amountInput.addEventListener(
+        "input",
+        updateWithdrawSummary
+    );
+
+
+    /* =========================================
+       ACCOUNT NUMBER
+    ========================================= */
+
+    withdrawAccount.addEventListener(
+        "input",
+        function () {
+
+            this.value =
+                this.value.replace(/\D/g, "");
+
+            withdrawAccountName.value = "";
+
+            accountMessage.textContent = "";
+
+
+            if (this.value.length === 10) {
+
+                /*
+                 * Temporary frontend state only.
+                 *
+                 * Real account-name verification must
+                 * be performed by the secure backend
+                 * through the appropriate banking/provider
+                 * infrastructure.
+                 */
+
+                withdrawAccountName.value =
+                    "Account verification pending";
+
+                accountMessage.textContent =
+                    "Account details will be verified securely before processing.";
+
+                accountMessage.style.color =
+                    "#087a3d";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       FORM SUBMISSION
+    ========================================= */
+
+    withdrawForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const amount =
+                Number(amountInput.value);
+
+
+            const account =
+                withdrawAccount.value.trim();
+
+
+            const bank =
+                withdrawBank.value;
+
+
+            if (!amount || amount < 100) {
+
+                alert(
+                    "Please enter a withdrawal amount of at least ₦100."
+                );
+
+                amountInput.focus();
+
+                return;
+            }
+
+
+            if (withdrawMethod.value !== "bank-transfer") {
+
+                alert(
+                    "Please select a withdrawal method."
+                );
+
+                withdrawMethod.focus();
+
+                return;
+            }
+
+
+            if (account.length !== 10) {
+
+                alert(
+                    "Please enter a valid 10-digit destination account number."
+                );
+
+                withdrawAccount.focus();
+
+                return;
+            }
+
+
+            if (!bank) {
+
+                alert(
+                    "Please select the destination bank."
+                );
+
+                withdrawBank.focus();
+
+                return;
+            }
+
+
+            const bankName =
+                withdrawBank.options[
+                    withdrawBank.selectedIndex
+                ].text;
+
+
+            const total =
+                amount + WITHDRAWAL_FEE;
+
+
+            confirmAmount.textContent =
+                formatMoney(amount);
+
+
+            confirmBank.textContent =
+                bankName;
+
+
+            confirmAccount.textContent =
+                account;
+
+
+            confirmFee.textContent =
+                formatMoney(WITHDRAWAL_FEE);
+
+
+            confirmTotal.textContent =
+                formatMoney(total);
+
+
+            modal.classList.add("active");
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+    );
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
+
+    function closeWithdrawModal() {
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    document
+        .getElementById("closeWithdrawModal")
+        .addEventListener(
+            "click",
+            closeWithdrawModal
+        );
+
+
+    document
+        .getElementById("withdrawModalClose")
+        .addEventListener(
+            "click",
+            closeWithdrawModal
+        );
+
+
+    document
+        .getElementById("cancelWithdraw")
+        .addEventListener(
+            "click",
+            closeWithdrawModal
+        );
+
+
+    /* =========================================
+       CONFIRM WITHDRAWAL
+       
+       REAL MONEY PROCESSING IS NOT DONE HERE.
+       The secure backend will handle the actual
+       withdrawal after we build it.
+    ========================================= */
+
+    document
+        .getElementById("confirmWithdraw")
+        .addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "Withdrawal request confirmed. Secure backend processing will be connected later."
+                );
+
+                closeWithdrawModal();
+
+            }
+        );
+
+});
