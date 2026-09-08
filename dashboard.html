@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Kollins Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <a href="dashboard.html" class="logo sidebar-logo">
+            <span class="logo-icon">K</span>
+            <span>Kollins Bank</span>
+        </a>
+
+        <nav class="side-nav">
+
+            <a href="dashboard.html" class="side-link active">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="transfer.html" class="side-link">
+                <span>↗</span>
+                Send Money
+            </a>
+
+            <a href="#" class="side-link">
+                <span>＋</span>
+                Add Money
+            </a>
+
+            <a href="#" class="side-link">
+                <span>↓</span>
+                Withdraw
+            </a>
+
+            <a href="transactions.html" class="side-link">
+                <span>↔</span>
+                Transactions
+            </a>
+
+            <a href="#" class="side-link">
+                <span>▣</span>
+                My Cards
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="profile.html" class="side-link">
+                <span>◯</span>
+                Profile
+            </a>
+
+            <a href="index.html" class="side-link logout-link">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+        <header class="dashboard-header">
+
+            <button class="dashboard-menu" id="dashboardMenu">
+                ☰
+            </button>
+
+            <div>
+                <p class="dashboard-label">Customer Dashboard</p>
+                <h1>Welcome back, Kollins</h1>
+            </div>
+
+            <div class="header-actions">
+
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+                <a href="profile.html" class="profile-mini">
+                    <span class="profile-avatar">K</span>
+
+                    <div>
+                        <strong>Kollins</strong>
+                        <small>Customer</small>
+                    </div>
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- BALANCE -->
+        <section class="dashboard-balance">
+
+            <div class="balance-main">
+
+                <div class="balance-heading">
+                    <span>Available Balance</span>
+
+                    <button id="balanceToggle">
+                        👁
+                    </button>
+                </div>
+
+                <h2 id="balanceAmount">
+                    ₦250,000.00
+                </h2>
+
+                <p>
+                    Account balance
+                    <span class="balance-status">● Active</span>
+                </p>
+
+            </div>
+
+            <div class="account-info">
+
+                <span>ACCOUNT NUMBER</span>
+
+                <strong id="accountNumber">
+                    0123456789
+                </strong>
+
+                <button id="copyAccount">
+                    Copy
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="dashboard-section">
+
+            <div class="section-title">
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Manage your money quickly.</p>
+                </div>
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a href="transfer.html" class="quick-card">
+                    <span class="quick-icon">↗</span>
+                    <strong>Send Money</strong>
+                    <small>Transfer funds</small>
+                </a>
+
+                <a href="#" class="quick-card">
+                    <span class="quick-icon">＋</span>
+                    <strong>Add Money</strong>
+                    <small>Fund your account</small>
+                </a>
+
+                <a href="#" class="quick-card">
+                    <span class="quick-icon">↓</span>
+                    <strong>Withdraw</strong>
+                    <small>Access your money</small>
+                </a>
+
+                <a href="transactions.html" class="quick-card">
+                    <span class="quick-icon">↔</span>
+                    <strong>Transactions</strong>
+                    <small>View activity</small>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOWER GRID -->
+        <div class="dashboard-grid">
+
+
+            <!-- TRANSACTIONS -->
+            <section class="transactions-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <h2>Recent Transactions</h2>
+                        <p>Your latest account activity.</p>
+                    </div>
+
+                    <a href="transactions.html">
+                        View all
+                    </a>
+
+                </div>
+
+
+                <div class="transaction-list">
+
+                    <div class="transaction-item">
+
+                        <div class="transaction-icon received">
+                            ↓
+                        </div>
+
+                        <div class="transaction-details">
+                            <strong>Salary Payment</strong>
+                            <small>Today · 09:42 AM</small>
+                        </div>
+
+                        <div class="transaction-amount positive">
+                            +₦150,000.00
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction-item">
+
+                        <div class="transaction-icon sent">
+                            ↗
+                        </div>
+
+                        <div class="transaction-details">
+                            <strong>Transfer</strong>
+                            <small>Yesterday · 04:15 PM</small>
+                        </div>
+
+                        <div class="transaction-amount">
+                            -₦10,005.00
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction-item">
+
+                        <div class="transaction-icon received">
+                            ↓
+                        </div>
+
+                        <div class="transaction-details">
+                            <strong>Money Received</strong>
+                            <small>Sep 6 · 12:30 PM</small>
+                        </div>
+
+                        <div class="transaction-amount positive">
+                            +₦25,000.00
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction-item">
+
+                        <div class="transaction-icon fee">
+                            ₦
+                        </div>
+
+                        <div class="transaction-details">
+                            <strong>Transfer Fee</strong>
+                            <small>Sep 5 · 08:10 AM</small>
+                        </div>
+
+                        <div class="transaction-amount">
+                            -₦5.00
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CARD -->
+            <section class="my-card-section">
+
+                <div class="card-heading">
+
+                    <div>
+                        <h2>My Card</h2>
+                        <p>Your primary card.</p>
+                    </div>
+
+                    <a href="#">
+                        Manage
+                    </a>
+
+                </div>
+
+
+                <div class="customer-bank-card">
+
+                    <div class="bank-card-top">
+                        <strong>KOLLINS BANK</strong>
+                        <span>▦</span>
+                    </div>
+
+                    <div class="bank-card-number">
+                        •••• •••• •••• 4582
+                    </div>
+
+                    <div class="bank-card-bottom">
+
+                        <div>
+                            <small>CARD HOLDER</small>
+                            <strong>KOLLINS</strong>
+                        </div>
+
+                        <div>
+                            <small>VALID THRU</small>
+                            <strong>12/30</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-status">
+                    <span>●</span>
+                    Card active
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- SECURITY -->
+        <section class="dashboard-security">
+
+            <div class="security-small-icon">
+                🔒
+            </div>
+
+            <div>
+                <strong>Your account security matters</strong>
+                <p>
+                    Never share your password, PIN or security codes
+                    with anyone.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
