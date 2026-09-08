@@ -1983,3 +1983,201 @@ footer {
     }
 
 }
+/* =========================================
+   ADD MONEY PAGE
+========================================= */
+
+.add-money-page {
+    padding: 30px;
+}
+
+.add-money-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.add-money-card,
+.add-money-info-card {
+    background: #ffffff;
+    border: 1px solid #e8eee9;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+}
+
+.add-money-card {
+    padding: 30px;
+}
+
+.add-money-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.add-money-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #e9f7ee;
+    color: #087a3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.add-money-card-header h2 {
+    margin: 0 0 5px;
+    font-size: 24px;
+}
+
+.add-money-card-header p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.quick-amounts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: -5px;
+    margin-bottom: 22px;
+}
+
+.quick-amounts button {
+    height: 42px;
+    border: 1px solid #dce6df;
+    background: #fff;
+    color: #087a3d;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.quick-amounts button:hover {
+    background: #e9f7ee;
+    border-color: #087a3d;
+}
+
+.form-group select {
+    width: 100%;
+    height: 52px;
+    border: 1px solid #dfe7e1;
+    border-radius: 11px;
+    padding: 0 15px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.form-group select:focus {
+    border-color: #087a3d;
+    box-shadow: 0 0 0 3px rgba(8, 122, 61, 0.08);
+}
+
+.add-money-summary {
+    background: #f7faf8;
+    border: 1px solid #e5ece7;
+    border-radius: 13px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.add-money-info-card {
+    padding: 28px;
+}
+
+.add-money-info-card h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.add-money-info-card > p {
+    color: #707a73;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.funding-method-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.method-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.method-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #f0f7f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.method-item strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.method-item p {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ADD MONEY MOBILE
+========================================= */
+
+@media (max-width: 850px) {
+
+    .add-money-page {
+        padding: 20px 15px;
+    }
+
+    .add-money-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .add-money-card {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .add-money-card-header h2 {
+        font-size: 21px;
+    }
+
+    .quick-amounts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .add-money-info-card {
+        padding: 22px;
+    }
+
+}
