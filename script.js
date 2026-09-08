@@ -248,3 +248,203 @@ if (copyAccount && accountNumber) {
     });
 
 }
+/* =========================================
+   SEND MONEY / TRANSFER PAGE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const transferForm = document.getElementById("transferForm");
+
+    if (!transferForm) {
+        return;
+    }
+
+    const accountInput = document.getElementById("recipientAccount");
+    const recipientName = document.getElementById("recipientName");
+    const accountMessage = document.getElementById("accountMessage");
+
+    const amountInput = document.getElementById("transferAmount");
+
+    const summaryAmount = document.getElementById("summaryAmount");
+    const summaryTotal = document.getElementById("summaryTotal");
+
+    const transferModal = document.getElementById("transferModal");
+
+    const closeTransferModal = document.getElementById("closeTransferModal");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+    const cancelTransferBtn = document.getElementById("cancelTransferBtn");
+    const confirmTransferBtn = document.getElementById("confirmTransferBtn");
+
+    const confirmRecipient = document.getElementById("confirmRecipient");
+    const confirmAccount = document.getElementById("confirmAccount");
+    const confirmAmount = document.getElementById("confirmAmount");
+    const confirmTotal = document.getElementById("confirmTotal");
+
+
+    const TRANSFER_FEE = 5;
+
+
+    /* =========================================
+       FORMAT MONEY
+    ========================================= */
+
+    function formatMoney(amount) {
+
+        return "₦" + Number(amount).toLocaleString("en-NG", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    }
+
+
+    /* =========================================
+       ACCOUNT NUMBER CHECK
+       
+       FRONTEND PLACEHOLDER ONLY.
+       Real recipient lookup must happen
+       securely on the backend.
+    ========================================= */
+
+    accountInput.addEventListener("input", function () {
+
+        this.value = this.value.replace(/\D/g, "");
+
+        recipientName.value = "";
+        accountMessage.textContent = "";
+        accountMessage.style.color = "";
+
+        if (this.value.length === 10) {
+
+            /*
+             * Temporary frontend behavior.
+             * This does NOT represent a real bank lookup.
+             * Later this will call the secure backend API.
+             */
+
+            recipientName.value = "Recipient account";
+
+            accountMessage.textContent =
+                "Account number entered. Recipient verification will happen securely.";
+
+            accountMessage.style.color = "#087a3d";
+        }
+
+    });
+
+
+    /* =========================================
+       UPDATE TRANSFER TOTAL
+    ========================================= */
+
+    amountInput.addEventListener("input", function () {
+
+        let amount = Number(this.value);
+
+        if (!amount || amount < 0) {
+            amount = 0;
+        }
+
+        summaryAmount.textContent = formatMoney(amount);
+
+        const total = amount + TRANSFER_FEE;
+
+        summaryTotal.textContent = formatMoney(total);
+
+    });
+
+
+    /* =========================================
+       OPEN CONFIRMATION MODAL
+    ========================================= */
+
+    transferForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const accountNumber = accountInput.value.trim();
+        const amount = Number(amountInput.value);
+        const description =
+            document.getElementById("transferDescription").value.trim();
+
+        if (accountNumber.length !== 10) {
+
+            alert("Please enter a valid 10-digit recipient account number.");
+
+            accountInput.focus();
+
+            return;
+        }
+
+
+        if (!amount || amount <= 0) {
+
+            alert("Please enter a valid transfer amount.");
+
+            amountInput.focus();
+
+            return;
+        }
+
+
+        const total = amount + TRANSFER_FEE;
+
+
+        confirmRecipient.textContent =
+            recipientName.value || "Recipient account";
+
+        confirmAccount.textContent = accountNumber;
+
+        confirmAmount.textContent = formatMoney(amount);
+
+        confirmTotal.textContent = formatMoney(total);
+
+
+        transferModal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
+
+    function closeModal() {
+
+        transferModal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    closeTransferModal.addEventListener("click", closeModal);
+
+    modalCloseBtn.addEventListener("click", closeModal);
+
+    cancelTransferBtn.addEventListener("click", closeModal);
+
+
+    /* =========================================
+       CONFIRM TRANSFER
+       
+       IMPORTANT:
+       This currently DOES NOT move real money.
+       Real transfer processing will be connected
+       to the secure backend later.
+    ========================================= */
+
+    confirmTransferBtn.addEventListener("click", function () {
+
+        alert(
+            "Transfer confirmation received. Real transaction processing will be connected to the secure bank backend."
+        );
+
+        closeModal();
+
+    });
+
+});
