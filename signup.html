@@ -3,142 +3,1215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Create Account | Kollins Bank</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           KOLLINS BANK — SIGN UP
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8f5;
+            color: #17251e;
+        }
+
+        .signup-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            background:
+                radial-gradient(circle at top left, #dff5e8, transparent 35%),
+                #f4f8f5;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .signup-logo {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 25px;
+            font-weight: 800;
+            color: #087443;
+        }
+
+        .signup-logo span {
+            color: #17251e;
+        }
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .signup-card {
+            background: #ffffff;
+            border: 1px solid #e1e9e4;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.07);
+        }
+
+        .signup-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .signup-heading h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #17251e;
+        }
+
+        .signup-heading p {
+            margin: 8px 0 0;
+            color: #75827b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .signup-form {
+            display: block;
+        }
+
+        .name-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #34423a;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d8e2dc;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            color: #17251e;
+            background: #ffffff;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #087443;
+            box-shadow: 0 0 0 3px rgba(8, 116, 67, 0.08);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 80px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #087443;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           TERMS
+        ========================================= */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 5px 0 20px;
+            font-size: 12px;
+            color: #68756e;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            margin-top: 3px;
+            accent-color: #087443;
+        }
+
+        .terms a {
+            color: #087443;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .signup-btn {
+            width: 100%;
+            border: none;
+            background: #087443;
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .signup-btn:hover {
+            background: #075d37;
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* =========================================
+           LOGIN LINK
+        ========================================= */
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #718078;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #087443;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* =========================================
+           OTP SECTION
+        ========================================= */
+
+        .otp-section {
+            display: none;
+        }
+
+        .otp-section.show {
+            display: block;
+        }
+
+        .signup-section.hide {
+            display: none;
+        }
+
+        .otp-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #e9f8ef;
+            color: #087443;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 27px;
+        }
+
+        .otp-heading {
+            text-align: center;
+        }
+
+        .otp-heading h2 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .otp-heading p {
+            color: #718078;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 8px 0 20px;
+        }
+
+        .otp-destination {
+            color: #087443;
+            font-weight: 700;
+        }
+
+        .otp-input {
+            width: 100%;
+            text-align: center;
+            letter-spacing: 10px;
+            font-size: 25px !important;
+            font-weight: 700;
+            padding: 15px !important;
+        }
+
+        .otp-input::placeholder {
+            letter-spacing: 5px;
+        }
+
+        .otp-message {
+            text-align: center;
+            min-height: 20px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .otp-success {
+            color: #087443;
+        }
+
+        .otp-error {
+            color: #c62828;
+        }
+
+        .resend-area {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #718078;
+        }
+
+        .resend-btn {
+            border: none;
+            background: transparent;
+            color: #087443;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .resend-btn:disabled {
+            color: #9ba7a0;
+            cursor: not-allowed;
+        }
+
+        .back-signup {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #68756e;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .back-signup:hover {
+            color: #087443;
+        }
+
+        /* =========================================
+           TEST OTP BOX
+        ========================================= */
+
+        .test-otp-box {
+            display: none;
+            background: #fff8df;
+            border: 1px solid #f1df9b;
+            color: #705900;
+            border-radius: 9px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .test-otp-box.show {
+            display: block;
+        }
+
+        .test-otp-code {
+            display: block;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-top: 5px;
+        }
+
+        /* =========================================
+           SECURITY NOTE
+        ========================================= */
+
+        .security-note {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 11px;
+            color: #87938c;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 550px) {
+
+            .signup-page {
+                padding: 15px;
+            }
+
+            .signup-card {
+                padding: 22px 18px;
+                border-radius: 16px;
+            }
+
+            .signup-heading h1 {
+                font-size: 23px;
+            }
+
+            .name-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .otp-input {
+                font-size: 22px !important;
+                letter-spacing: 7px;
+            }
+        }
+    </style>
 </head>
 
-<body class="auth-page">
+<body>
 
-<header class="auth-header">
-    <a href="index.html" class="logo">
-        <span class="logo-icon">K</span>
-        <span>Kollins Bank</span>
-    </a>
+    <main class="signup-page">
 
-    <a href="login.html" class="back-link">
-        Already have an account? <strong>Login</strong>
-    </a>
-</header>
+        <div class="signup-container">
 
-<main class="auth-container">
+            <!-- LOGO -->
+            <div class="signup-logo">
+                KOLLINS <span>BANK</span>
+            </div>
 
-    <div class="auth-card">
 
-        <div class="auth-heading">
-            <span class="eyebrow">KOLLINS BANK</span>
-            <h1>Create your account</h1>
-            <p>
-                Enter your details below to begin your account registration.
-            </p>
+            <div class="signup-card">
+
+
+                <!-- =====================================
+                     SIGN UP SECTION
+                ====================================== -->
+
+                <section
+                    class="signup-section"
+                    id="signupSection"
+                >
+
+                    <div class="signup-heading">
+
+                        <h1>Create Your Account</h1>
+
+                        <p>
+                            Open your Kollins Bank account and
+                            get started with secure digital banking.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        class="signup-form"
+                        id="signupForm"
+                    >
+
+                        <!-- FIRST + LAST NAME -->
+                        <div class="name-row">
+
+                            <div class="form-group">
+
+                                <label for="firstName">
+                                    First Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    placeholder="Enter first name"
+                                    autocomplete="given-name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="lastName">
+                                    Last Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    placeholder="Enter last name"
+                                    autocomplete="family-name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PHONE -->
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="+234 801 234 5678"
+                                autocomplete="tel"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+                        <div class="form-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    placeholder="Create a strong password"
+                                    autocomplete="new-password"
+                                    minlength="8"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="show-password"
+                                    id="showPassword"
+                                >
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="Confirm your password"
+                                    autocomplete="new-password"
+                                    minlength="8"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="show-password"
+                                    id="showConfirmPassword"
+                                >
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TERMS -->
+                        <div class="terms">
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                required
+                            >
+
+                            <label for="terms">
+
+                                I agree to the
+                                <a href="#" onclick="return false;">
+                                    Terms & Conditions
+                                </a>
+                                and
+                                <a href="#" onclick="return false;">
+                                    Privacy Policy
+                                </a>.
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- CREATE ACCOUNT -->
+                        <button
+                            type="submit"
+                            class="signup-btn"
+                            id="createAccountBtn"
+                        >
+                            Create Account
+                        </button>
+
+                    </form>
+
+
+                    <div class="login-link">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </div>
+
+
+                    <div class="security-note">
+                        🔒 Your information is protected with secure
+                        account verification.
+                    </div>
+
+                </section>
+
+
+
+                <!-- =====================================
+                     OTP SECTION
+                ====================================== -->
+
+                <section
+                    class="otp-section"
+                    id="otpSection"
+                >
+
+                    <div class="otp-icon">
+                        ✉
+                    </div>
+
+
+                    <div class="otp-heading">
+
+                        <h2>
+                            Verify Your Account
+                        </h2>
+
+                        <p>
+                            We've sent a 6-digit verification code
+                            to your email/phone.
+                            Enter the code below to continue.
+                        </p>
+
+                        <p>
+                            Code sent to:
+                            <span
+                                class="otp-destination"
+                                id="otpDestination"
+                            >
+                                your contact
+                            </span>
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="otp">
+                            Verification Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="otp"
+                            class="otp-input"
+                            inputmode="numeric"
+                            autocomplete="one-time-code"
+                            maxlength="6"
+                            placeholder="000000"
+                        >
+
+                    </div>
+
+
+                    <div
+                        class="otp-message"
+                        id="otpMessage"
+                    ></div>
+
+
+                    <button
+                        type="button"
+                        class="signup-btn"
+                        id="verifyOtpBtn"
+                    >
+                        Verify Code
+                    </button>
+
+
+                    <div class="resend-area">
+
+                        Didn't receive the code?
+
+                        <button
+                            type="button"
+                            class="resend-btn"
+                            id="resendOtpBtn"
+                            disabled
+                        >
+                            Resend Code
+                        </button>
+
+                        <span id="resendTimer"></span>
+
+                    </div>
+
+
+                    <div
+                        class="back-signup"
+                        id="backToSignup"
+                    >
+                        ← Back to registration
+                    </div>
+
+
+                    <!-- TESTING ONLY -->
+                    <div
+                        class="test-otp-box"
+                        id="testOtpBox"
+                    >
+
+                        Testing mode:
+
+                        <span
+                            class="test-otp-code"
+                            id="testOtpCode"
+                        >
+                            000000
+                        </span>
+
+                        <div>
+                            This code is displayed only because
+                            the backend email/SMS service has not
+                            been connected yet.
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
         </div>
 
-        <form id="signupForm">
+    </main>
 
-            <div class="form-row">
 
-                <div class="form-group">
-                    <label for="firstName">First name</label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        placeholder="Enter first name"
-                        required
-                    >
-                </div>
+    <script>
 
-                <div class="form-group">
-                    <label for="lastName">Last name</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        placeholder="Enter last name"
-                        required
-                    >
-                </div>
+        /* =========================================
+           KOLLINS BANK — SIGN UP + OTP
+        ========================================= */
 
-            </div>
 
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="you@example.com"
-                    required
-                >
-            </div>
+        const signupForm =
+            document.getElementById("signupForm");
 
-            <div class="form-group">
-                <label for="phone">Phone number</label>
-                <input
-                    type="tel"
-                    id="phone"
-                    placeholder="Enter phone number"
-                    required
-                >
-            </div>
+        const signupSection =
+            document.getElementById("signupSection");
 
-            <div class="form-group">
-                <label for="password">Create password</label>
+        const otpSection =
+            document.getElementById("otpSection");
 
-                <div class="password-field">
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Create a strong password"
-                        required
-                    >
+        const createAccountBtn =
+            document.getElementById("createAccountBtn");
 
-                    <button type="button" class="show-password"
-                        onclick="togglePassword('password', this)">
-                        Show
-                    </button>
-                </div>
-            </div>
+        const verifyOtpBtn =
+            document.getElementById("verifyOtpBtn");
 
-            <div class="form-group">
-                <label for="confirmPassword">Confirm password</label>
+        const resendOtpBtn =
+            document.getElementById("resendOtpBtn");
 
-                <div class="password-field">
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Repeat your password"
-                        required
-                    >
+        const resendTimer =
+            document.getElementById("resendTimer");
 
-                    <button type="button" class="show-password"
-                        onclick="togglePassword('confirmPassword', this)">
-                        Show
-                    </button>
-                </div>
-            </div>
+        const otpInput =
+            document.getElementById("otp");
 
-            <label class="checkbox-label">
-                <input type="checkbox" id="terms" required>
-                <span>
-                    I agree to the Terms of Service and Privacy Policy.
-                </span>
-            </label>
+        const otpMessage =
+            document.getElementById("otpMessage");
 
-            <button type="submit" class="auth-button">
-                Create Account
-            </button>
+        const otpDestination =
+            document.getElementById("otpDestination");
 
-            <div id="signupMessage" class="form-message"></div>
+        const testOtpBox =
+            document.getElementById("testOtpBox");
 
-        </form>
+        const testOtpCode =
+            document.getElementById("testOtpCode");
 
-        <p class="auth-footer-text">
-            Already registered?
-            <a href="login.html">Login to your account</a>
-        </p>
+        const backToSignup =
+            document.getElementById("backToSignup");
 
-    </div>
 
-</main>
+        /* =========================================
+           TEMPORARY OTP STORAGE
+        ========================================= */
 
-<script src="script.js"></script>
+        let generatedOtp = "";
+
+        let resendInterval = null;
+
+        let resendSeconds = 30;
+
+
+        /* =========================================
+           GENERATE 6-DIGIT OTP
+        ========================================= */
+
+        function generateOtp() {
+
+            return Math.floor(
+                100000 + Math.random() * 900000
+            ).toString();
+
+        }
+
+
+        /* =========================================
+           START RESEND TIMER
+        ========================================= */
+
+        function startResendTimer() {
+
+            clearInterval(resendInterval);
+
+            resendSeconds = 30;
+
+            resendOtpBtn.disabled = true;
+
+            resendTimer.textContent =
+                ` (${resendSeconds}s)`;
+
+
+            resendInterval = setInterval(() => {
+
+                resendSeconds--;
+
+                resendTimer.textContent =
+                    ` (${resendSeconds}s)`;
+
+
+                if (resendSeconds <= 0) {
+
+                    clearInterval(resendInterval);
+
+                    resendOtpBtn.disabled = false;
+
+                    resendTimer.textContent = "";
+
+                }
+
+            }, 1000);
+
+        }
+
+
+        /* =========================================
+           PASSWORD SHOW / HIDE
+        ========================================= */
+
+        const password =
+            document.getElementById("password");
+
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+        const showPassword =
+            document.getElementById("showPassword");
+
+        const showConfirmPassword =
+            document.getElementById("showConfirmPassword");
+
+
+        showPassword.addEventListener("click", () => {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                showPassword.textContent = "Hide";
+
+            } else {
+
+                password.type = "password";
+
+                showPassword.textContent = "Show";
+
+            }
+
+        });
+
+
+        showConfirmPassword.addEventListener("click", () => {
+
+            if (confirmPassword.type === "password") {
+
+                confirmPassword.type = "text";
+
+                showConfirmPassword.textContent = "Hide";
+
+            } else {
+
+                confirmPassword.type = "password";
+
+                showConfirmPassword.textContent = "Show";
+
+            }
+
+        });
+
+
+        /* =========================================
+           SIGN UP
+        ========================================= */
+
+        signupForm.addEventListener("submit", (event) => {
+
+            event.preventDefault();
+
+
+            const firstName =
+                document.getElementById("firstName")
+                .value.trim();
+
+            const lastName =
+                document.getElementById("lastName")
+                .value.trim();
+
+            const email =
+                document.getElementById("email")
+                .value.trim();
+
+            const phone =
+                document.getElementById("phone")
+                .value.trim();
+
+            const passwordValue =
+                password.value;
+
+            const confirmPasswordValue =
+                confirmPassword.value;
+
+
+            /* PASSWORD CHECK */
+
+            if (passwordValue.length < 8) {
+
+                alert(
+                    "Password must contain at least 8 characters."
+                );
+
+                return;
+
+            }
+
+
+            /* CONFIRM PASSWORD */
+
+            if (passwordValue !== confirmPasswordValue) {
+
+                alert(
+                    "Passwords do not match."
+                );
+
+                return;
+
+            }
+
+
+            /* CREATE OTP */
+
+            generatedOtp = generateOtp();
+
+
+            /*
+               TEMPORARY TESTING ONLY.
+
+               In the real backend:
+               - OTP is generated server-side.
+               - OTP is stored securely.
+               - OTP is sent through email/SMS provider.
+               - OTP is never exposed in the webpage.
+            */
+
+            console.log(
+                "TEST OTP:",
+                generatedOtp
+            );
+
+
+            /* SHOW DESTINATION */
+
+            otpDestination.textContent =
+                email;
+
+
+            /*
+               TESTING BOX.
+
+               Remove this box once the backend
+               email/SMS service is connected.
+            */
+
+            testOtpCode.textContent =
+                generatedOtp;
+
+            testOtpBox.classList.add("show");
+
+
+            /* SWITCH SCREEN */
+
+            signupSection.classList.add("hide");
+
+            otpSection.classList.add("show");
+
+
+            /* CLEAR OTP */
+
+            otpInput.value = "";
+
+            otpMessage.textContent = "";
+
+            otpMessage.className =
+                "otp-message";
+
+
+            /* START TIMER */
+
+            startResendTimer();
+
+
+            /* FOCUS OTP */
+
+            setTimeout(() => {
+
+                otpInput.focus();
+
+            }, 200);
+
+        });
+
+
+        /* =========================================
+           OTP INPUT
+        ========================================= */
+
+        otpInput.addEventListener("input", () => {
+
+            otpInput.value =
+                otpInput.value
+                    .replace(/\D/g, "")
+                    .slice(0, 6);
+
+        });
+
+
+        /* =========================================
+           VERIFY OTP
+        ========================================= */
+
+        verifyOtpBtn.addEventListener("click", () => {
+
+            const enteredOtp =
+                otpInput.value.trim();
+
+
+            if (enteredOtp.length !== 6) {
+
+                otpMessage.textContent =
+                    "Please enter the 6-digit verification code.";
+
+                otpMessage.className =
+                    "otp-message otp-error";
+
+                return;
+
+            }
+
+
+            if (enteredOtp !== generatedOtp) {
+
+                otpMessage.textContent =
+                    "Incorrect verification code. Please try again.";
+
+                otpMessage.className =
+                    "otp-message otp-error";
+
+                return;
+
+            }
+
+
+            /* SUCCESS */
+
+            otpMessage.textContent =
+                "Account verified successfully.";
+
+            otpMessage.className =
+                "otp-message otp-success";
+
+
+            verifyOtpBtn.disabled = true;
+
+            verifyOtpBtn.textContent =
+                "Account Verified";
+
+
+            clearInterval(resendInterval);
+
+
+            /*
+               TEMPORARY FRONTEND ACCOUNT CREATION.
+
+               The real backend will create the customer
+               account in the database here.
+            */
+
+            setTimeout(() => {
+
+                alert(
+                    "Account created successfully!"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }, 1200);
+
+        });
+
+
+        /* =========================================
+           RESEND OTP
+        ========================================= */
+
+        resendOtpBtn.addEventListener("click", () => {
+
+            generatedOtp = generateOtp();
+
+
+            console.log(
+                "NEW TEST OTP:",
+                generatedOtp
+            );
+
+
+            /* TESTING ONLY */
+
+            testOtpCode.textContent =
+                generatedOtp;
+
+            testOtpBox.classList.add("show");
+
+
+            otpInput.value = "";
+
+            otpMessage.textContent =
+                "A new verification code has been generated.";
+
+            otpMessage.className =
+                "otp-message otp-success";
+
+
+            startResendTimer();
+
+
+            otpInput.focus();
+
+        });
+
+
+        /* =========================================
+           BACK TO SIGN UP
+        ========================================= */
+
+        backToSignup.addEventListener("click", () => {
+
+            clearInterval(resendInterval);
+
+            otpSection.classList.remove("show");
+
+            signupSection.classList.remove("hide");
+
+            otpInput.value = "";
+
+            otpMessage.textContent = "";
+
+        });
+
+    </script>
 
 </body>
 </html>
