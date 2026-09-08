@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money | Kollins Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="dashboardSidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">K</div>
+            <span>Kollins Bank</span>
+        </div>
+
+        <nav class="side-nav">
+
+            <a href="dashboard.html" class="side-link">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="transfer.html" class="side-link active">
+                <span>↗</span>
+                <span>Send Money</span>
+            </a>
+
+            <a href="#" class="side-link">
+                <span>＋</span>
+                <span>Add Money</span>
+            </a>
+
+            <a href="#" class="side-link">
+                <span>↓</span>
+                <span>Withdraw</span>
+            </a>
+
+            <a href="#" class="side-link">
+                <span>↔</span>
+                <span>Transactions</span>
+            </a>
+
+            <a href="#" class="side-link">
+                <span>▣</span>
+                <span>My Cards</span>
+            </a>
+
+            <a href="#" class="side-link">
+                <span>◯</span>
+                <span>Profile</span>
+            </a>
+
+            <a href="login.html" class="side-link logout-link">
+                <span>↪</span>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="dashboard-main">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <div class="dashboard-header-left">
+
+                <button class="dashboard-menu" id="dashboardMenu">
+                    ☰
+                </button>
+
+                <div>
+                    <h1>Send Money</h1>
+                    <p>Transfer money securely to another account.</p>
+                </div>
+
+            </div>
+
+            <div class="dashboard-header-right">
+
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="header-profile">
+                    <div class="profile-avatar">K</div>
+
+                    <div class="header-profile-text">
+                        <strong>Kollins</strong>
+                        <span>Customer</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- TRANSFER CONTENT -->
+        <section class="transfer-page">
+
+            <div class="transfer-container">
+
+                <!-- TRANSFER FORM -->
+                <div class="transfer-card">
+
+                    <div class="transfer-card-header">
+
+                        <div class="transfer-icon">
+                            ↗
+                        </div>
+
+                        <div>
+                            <h2>Send Money</h2>
+                            <p>Enter the recipient's details below.</p>
+                        </div>
+
+                    </div>
+
+
+                    <form id="transferForm">
+
+                        <!-- ACCOUNT NUMBER -->
+                        <div class="form-group">
+
+                            <label for="recipientAccount">
+                                Recipient Account Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="recipientAccount"
+                                placeholder="Enter 10-digit account number"
+                                maxlength="10"
+                                inputmode="numeric"
+                                required
+                            >
+
+                            <small id="accountMessage"></small>
+
+                        </div>
+
+
+                        <!-- RECIPIENT NAME -->
+                        <div class="form-group">
+
+                            <label for="recipientName">
+                                Recipient Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="recipientName"
+                                placeholder="Recipient name will appear here"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- AMOUNT -->
+                        <div class="form-group">
+
+                            <label for="transferAmount">
+                                Amount
+                            </label>
+
+                            <div class="amount-input">
+                                <span>₦</span>
+
+                                <input
+                                    type="number"
+                                    id="transferAmount"
+                                    placeholder="0.00"
+                                    min="1"
+                                    step="0.01"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+                        <div class="form-group">
+
+                            <label for="transferDescription">
+                                Description
+                                <span class="optional">(Optional)</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="transferDescription"
+                                placeholder="What is this transfer for?"
+                                maxlength="100"
+                            >
+
+                        </div>
+
+
+                        <!-- FEE SUMMARY -->
+                        <div class="transfer-summary">
+
+                            <div class="summary-row">
+                                <span>Transfer amount</span>
+                                <strong id="summaryAmount">₦0.00</strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span>Transfer fee</span>
+                                <strong>₦5.00</strong>
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-row total-row">
+                                <span>Total debit</span>
+                                <strong id="summaryTotal">₦5.00</strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- BALANCE -->
+                        <div class="available-balance">
+
+                            <span>Available balance</span>
+
+                            <strong>
+                                ₦250,000.00
+                            </strong>
+
+                        </div>
+
+
+                        <!-- BUTTON -->
+                        <button
+                            type="submit"
+                            class="transfer-submit-btn"
+                            id="continueTransferBtn"
+                        >
+                            Continue
+                            <span>→</span>
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- SECURITY CARD -->
+                <div class="transfer-info-card">
+
+                    <div class="info-icon">
+                        🔒
+                    </div>
+
+                    <h3>Secure Transfer</h3>
+
+                    <p>
+                        Your transfer will be processed securely.
+                        Always verify the recipient's account details
+                        before confirming a transaction.
+                    </p>
+
+                    <div class="security-points">
+
+                        <div>
+                            <span>✓</span>
+                            <p>Secure transaction processing</p>
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            <p>Transaction confirmation required</p>
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            <p>Transfer activity recorded</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- CONFIRMATION MODAL -->
+<div class="transfer-modal" id="transferModal">
+
+    <div class="transfer-modal-overlay" id="closeTransferModal"></div>
+
+    <div class="transfer-modal-box">
+
+        <button
+            class="modal-close"
+            id="modalCloseBtn"
+            type="button"
+        >
+            ×
+        </button>
+
+        <div class="modal-icon">
+            ↗
+        </div>
+
+        <h2>Confirm Transfer</h2>
+
+        <p class="modal-description">
+            Please review the transaction details before confirming.
+        </p>
+
+
+        <div class="confirmation-details">
+
+            <div class="confirmation-row">
+                <span>Recipient</span>
+                <strong id="confirmRecipient">—</strong>
+            </div>
+
+            <div class="confirmation-row">
+                <span>Account Number</span>
+                <strong id="confirmAccount">—</strong>
+            </div>
+
+            <div class="confirmation-row">
+                <span>Amount</span>
+                <strong id="confirmAmount">₦0.00</strong>
+            </div>
+
+            <div class="confirmation-row">
+                <span>Transfer Fee</span>
+                <strong>₦5.00</strong>
+            </div>
+
+            <div class="confirmation-divider"></div>
+
+            <div class="confirmation-row confirmation-total">
+                <span>Total Debit</span>
+                <strong id="confirmTotal">₦5.00</strong>
+            </div>
+
+        </div>
+
+
+        <div class="confirmation-actions">
+
+            <button
+                type="button"
+                class="cancel-transfer-btn"
+                id="cancelTransferBtn"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="confirm-transfer-btn"
+                id="confirmTransferBtn"
+            >
+                Confirm Transfer
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
