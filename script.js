@@ -172,3 +172,79 @@ if (loginForm) {
     });
 
 }
+/* =========================
+   DASHBOARD SIDEBAR
+========================= */
+
+const dashboardMenu = document.getElementById("dashboardMenu");
+const sidebar = document.getElementById("sidebar");
+
+if (dashboardMenu && sidebar) {
+
+    dashboardMenu.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+    });
+
+}
+
+
+/* =========================
+   BALANCE SHOW / HIDE
+========================= */
+
+const balanceToggle = document.getElementById("balanceToggle");
+const balanceAmount = document.getElementById("balanceAmount");
+
+if (balanceToggle && balanceAmount) {
+
+    let balanceVisible = true;
+
+    balanceToggle.addEventListener("click", () => {
+
+        balanceVisible = !balanceVisible;
+
+        if (balanceVisible) {
+            balanceAmount.textContent = "₦250,000.00";
+            balanceToggle.textContent = "👁";
+        } else {
+            balanceAmount.textContent = "₦••••••••";
+            balanceToggle.textContent = "◉";
+        }
+
+    });
+
+}
+
+
+/* =========================
+   COPY ACCOUNT NUMBER
+========================= */
+
+const copyAccount = document.getElementById("copyAccount");
+const accountNumber = document.getElementById("accountNumber");
+
+if (copyAccount && accountNumber) {
+
+    copyAccount.addEventListener("click", async () => {
+
+        try {
+
+            await navigator.clipboard.writeText(
+                accountNumber.textContent.trim()
+            );
+
+            copyAccount.textContent = "Copied";
+
+            setTimeout(() => {
+                copyAccount.textContent = "Copy";
+            }, 1500);
+
+        } catch (error) {
+
+            copyAccount.textContent = "Copy failed";
+
+        }
+
+    });
+
+}
