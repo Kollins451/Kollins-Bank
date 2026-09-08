@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Kollins Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+<header class="auth-header">
+
+    <a href="index.html" class="logo">
+        <span class="logo-icon">K</span>
+        <span>Kollins Bank</span>
+    </a>
+
+    <a href="signup.html" class="back-link">
+        New customer? <strong>Open Account</strong>
+    </a>
+
+</header>
+
+
+<main class="auth-container">
+
+    <div class="auth-card login-card">
+
+        <div class="auth-heading">
+            <span class="eyebrow">WELCOME BACK</span>
+
+            <h1>Login to your account</h1>
+
+            <p>
+                Securely access your Kollins Bank account.
+            </p>
+        </div>
+
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="loginEmail">
+                    Email address
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+
+                <div class="label-row">
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <a href="#" class="forgot-link">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <div class="password-field">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('loginPassword', this)">
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <label class="checkbox-label">
+                <input type="checkbox" id="rememberMe">
+                <span>Remember me</span>
+            </label>
+
+
+            <button type="submit" class="auth-button">
+                Login
+            </button>
+
+
+            <div id="loginMessage" class="form-message"></div>
+
+        </form>
+
+
+        <div class="secure-note">
+            <span>🔒</span>
+            <div>
+                <strong>Secure login</strong>
+                <p>
+                    Your account credentials should be
+                    processed securely by the backend.
+                </p>
+            </div>
+        </div>
+
+
+        <p class="auth-footer-text">
+            Don't have an account?
+            <a href="signup.html">Create an account</a>
+        </p>
+
+    </div>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
