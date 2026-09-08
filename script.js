@@ -448,3 +448,233 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+/* =========================================
+   ADD MONEY PAGE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addMoneyForm = document.getElementById("addMoneyForm");
+
+    if (!addMoneyForm) {
+        return;
+    }
+
+    const amountInput =
+        document.getElementById("addMoneyAmount");
+
+    const fundingMethod =
+        document.getElementById("fundingMethod");
+
+    const summaryAmount =
+        document.getElementById("addSummaryAmount");
+
+    const summaryTotal =
+        document.getElementById("addSummaryTotal");
+
+    const modal =
+        document.getElementById("addMoneyModal");
+
+    const confirmAmount =
+        document.getElementById("confirmAddAmount");
+
+    const confirmTotal =
+        document.getElementById("confirmAddTotal");
+
+    const confirmMethod =
+        document.getElementById("confirmFundingMethod");
+
+
+    function formatMoney(amount) {
+
+        return "₦" + Number(amount).toLocaleString("en-NG", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    }
+
+
+    /* =========================================
+       QUICK AMOUNT BUTTONS
+    ========================================= */
+
+    const quickButtons =
+        document.querySelectorAll(".quick-amounts button");
+
+    quickButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const amount =
+                Number(this.dataset.amount);
+
+            amountInput.value = amount;
+
+            updateSummary();
+
+        });
+
+    });
+
+
+    /* =========================================
+       UPDATE SUMMARY
+    ========================================= */
+
+    function updateSummary() {
+
+        let amount = Number(amountInput.value);
+
+        if (!amount || amount < 0) {
+            amount = 0;
+        }
+
+        summaryAmount.textContent =
+            formatMoney(amount);
+
+        summaryTotal.textContent =
+            formatMoney(amount);
+
+    }
+
+
+    amountInput.addEventListener(
+        "input",
+        updateSummary
+    );
+
+
+    /* =========================================
+       OPEN CONFIRMATION
+    ========================================= */
+
+    addMoneyForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+            const amount =
+                Number(amountInput.value);
+
+            const method =
+                fundingMethod.value;
+
+
+            if (!amount || amount < 100) {
+
+                alert(
+                    "Please enter an amount of at least ₦100."
+                );
+
+                amountInput.focus();
+
+                return;
+            }
+
+
+            if (!method) {
+
+                alert(
+                    "Please select a funding method."
+                );
+
+                fundingMethod.focus();
+
+                return;
+            }
+
+
+            let methodName = "—";
+
+
+            if (method === "bank-card") {
+                methodName = "Debit / ATM Card";
+            }
+
+
+            if (method === "bank-transfer") {
+                methodName = "Bank Transfer";
+            }
+
+
+            confirmAmount.textContent =
+                formatMoney(amount);
+
+            confirmTotal.textContent =
+                formatMoney(amount);
+
+            confirmMethod.textContent =
+                methodName;
+
+
+            modal.classList.add("active");
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+    );
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
+
+    function closeAddMoneyModal() {
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    document
+        .getElementById("closeAddMoneyModal")
+        .addEventListener(
+            "click",
+            closeAddMoneyModal
+        );
+
+
+    document
+        .getElementById("addMoneyModalClose")
+        .addEventListener(
+            "click",
+            closeAddMoneyModal
+        );
+
+
+    document
+        .getElementById("cancelAddMoney")
+        .addEventListener(
+            "click",
+            closeAddMoneyModal
+        );
+
+
+    /* =========================================
+       CONTINUE FUNDING
+       
+       REAL MONEY PROCESSING WILL BE CONNECTED
+       THROUGH THE SECURE BACKEND LATER.
+    ========================================= */
+
+    document
+        .getElementById("confirmAddMoney")
+        .addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "Funding request confirmed. Payment processing will be connected to the secure backend."
+                );
+
+                closeAddMoneyModal();
+
+            }
+        );
+
+});
